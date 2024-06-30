@@ -60,7 +60,6 @@ const showAiDetails = (aiDetail) => {
     </div>     
  </div>   
       `;
-
       show_details_modal.showModal();
 }
 
@@ -99,13 +98,10 @@ const displayAiDetails = aiDetail => {
                   </div>
                   <div><img onclick="handleShowDetails('${aiDetail.id}')" src="image/Group 31.png"></div>
                 </div>
-                  </div>
-                  
+                  </div>     
             `;
             aiInformationDetails.appendChild(aiDetailCard);
         });
 
     } 
-
-
 loadAiDetails();
