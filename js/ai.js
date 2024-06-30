@@ -1,18 +1,72 @@
 const loadAiDetails = async () => {
-    try {
+
         const res = await fetch('https://openapi.programming-hero.com/api/ai/tools');
         const data = await res.json();
         const aiDetails = data.data;
         console.log('aiDetails:', aiDetails);
         displayAiDetails(aiDetails);
-    } catch (error) {
-        console.error('Error fetching AI details:', error);
-    }
+    
 }
 
-const displayAiDetails = aiDetails => {
+const handleShowDetails = async(id) => {
+     console.log('click', id);
+     const res = await fetch(`https://openapi.programming-hero.com/api/ai/tool/${id}`);
+     const data = await res.json();
+     const aiDetail = data.data;
+     showAiDetails(aiDetail);
+}
+
+const showAiDetails = (aiDetail) => {
+      console.log(aiDetail);
+      const aiDetailModal = document.getElementById('show-details-container');
+      console.log(aiDetailModal);
+      aiDetailModal.innerHTML = `
+    <div class="bg-[#fdefef] p-7 rounded-xl">
+      <h1 class="text-2xl font-semibold">${aiDetail['description']}</h1>
+      <div class="flex justify-around items-center gap-4 mt-4 font-bold">
+         <div class="p-4 text-[#03A30A]"><p>$10/<br>month<br>Basic<p></div>
+         <div class="p-4 text-[#F28927]"><p>$50/<br>month<br>Pro<p></div>
+         <div class="p-4 text-[#EB5757]"><p>Contact<br>us<br>Enterprise<p></div>
+      </div>
+
+      <div>
+           <div class="flex justify-around items-center">
+                <div class="card-body">
+                  <h2 class="card-title"><span>Feature : </span> </h2>
+                  <div class="mt-2">
+              
+                <ul>
+                    <li>${aiDetail?.features[1]['feature_name']}</li>
+                    <li>${aiDetail?.features[2]['feature_name']}</li>
+                    <li>${aiDetail?.features[3]['feature_name']}</li>
+                 </ul> 
+                
+                </div>
+           </div>
+           <div>
+               <div class="card-body">
+                  <h2 class="card-title"><span>Integrations : </span> </h2>
+                  <div class="mt-2">
+                  
+                  <ul>
+                    <li>${aiDetail?.integrations[0]}</li>
+                    <li>${aiDetail?.integrations[1]}</li>
+                    <li>${aiDetail?.integrations[2]}</li>
+                 </ul>
+           </div>
+      </div>
+    </div>
+      `
+     
+
+
+      show_details_modal.showModal();
+}
+
+
+const displayAiDetails = aiDetail => {
        const aiInformationDetails = document.getElementById('ai-information-details');
-        aiDetails.tools.forEach(aiDetail => {
+        aiDetail.tools.forEach(aiDetail => {
             console.log(aiDetail);
             // 2 create a div 
             const aiDetailCard = document.createElement('div');
@@ -42,7 +96,7 @@ const displayAiDetails = aiDetails => {
                   <img src="image/Frame.png">
                   <p>${aiDetail.published_in}</p>
                   </div>
-                  <div><img src="image/Group 31.png"></div>
+                  <div><img onclick="handleShowDetails('${aiDetail.id}')" src="image/Group 31.png"></div>
                 </div>
                   </div>
                   
