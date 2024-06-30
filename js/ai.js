@@ -21,18 +21,20 @@ const showAiDetails = (aiDetail) => {
       const aiDetailModal = document.getElementById('show-details-container');
       console.log(aiDetailModal);
       aiDetailModal.innerHTML = `
-    <div class="bg-[#fdefef] p-7 rounded-xl">
-      <h1 class="text-2xl font-semibold">${aiDetail['description']}</h1>
+<div class="flex justify-around gap-4">
+
+    <div class=" p-5 rounded-xl">
+      <h1 class=" font-semibold">${aiDetail['description']}</h1>
       <div class="flex justify-around items-center gap-4 mt-4 font-bold">
-         <div class="p-4 text-[#03A30A]"><p>$10/<br>month<br>Basic<p></div>
-         <div class="p-4 text-[#F28927]"><p>$50/<br>month<br>Pro<p></div>
-         <div class="p-4 text-[#EB5757]"><p>Contact<br>us<br>Enterprise<p></div>
+         <div class="p-4 text-[#03A30A] bg-white rounded-xl"><p>$10/<br>month<br>Basic<p></div>
+         <div class="p-4 text-[#F28927] bg-white  rounded-xl"><p>$50/<br>month<br>Pro<p></div>
+         <div class="p-4 text-[#EB5757] bg-white  rounded-xl"><p>Contact<br>us<br>Enterprise<p></div>
       </div>
 
       <div>
-           <div class="flex justify-around items-center">
+           <div class="flex justify-around">
                 <div class="card-body">
-                  <h2 class="card-title"><span>Feature : </span> </h2>
+                  <h2 class="card-title"><span>Feature : </span></h2>
                   <div class="mt-2">
               
                 <ul>
@@ -45,20 +47,19 @@ const showAiDetails = (aiDetail) => {
            </div>
            <div>
                <div class="card-body">
-                  <h2 class="card-title"><span>Integrations : </span> </h2>
-                  <div class="mt-2">
+                  <h2 class="card-title"><span>Integrations:</span></h2>
+               <div class="mt-2">
                   
                   <ul>
-                    <li>${aiDetail?.integrations[0]}</li>
-                    <li>${aiDetail?.integrations[1]}</li>
-                    <li>${aiDetail?.integrations[2]}</li>
+                    <li>${aiDetail?.integrations[0] || 'No data Found'}</li>
+                    <li>${aiDetail?.integrations[1] || 'No data Found'}</li>
+                    <li>${aiDetail?.integrations[2] || 'No data Found'}</li>
                  </ul>
            </div>
       </div>
-    </div>
-      `
-     
-
+    </div>     
+ </div>   
+      `;
 
       show_details_modal.showModal();
 }
@@ -73,7 +74,7 @@ const displayAiDetails = aiDetail => {
             aiDetailCard.classList = `card bg-base-100 p-4 shadow-xl`;
             // 3 set inner HTML 
             aiDetailCard.innerHTML = `
-            <figure>
+                <figure>
                   <img
                     src="${aiDetail.image}"
                     alt="Shoes" />
